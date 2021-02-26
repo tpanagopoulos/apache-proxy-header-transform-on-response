@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  node:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ${PWD}/backend/backend.js:/home/node/app/backend.js
+    ports:
+      - '3000:3000'
+    command: "node backend.js"
+  apache:
+    image: 'httpd:2.4'
+    ports:
+      - '8080:80'
+    links:
+      - node:nodecomponent
+    volumes:
+      - ${PWD}/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ${PWD}/vhosts/vhost-proxy.conf:/usr/local/apache2/vhosts/vhost-proxy.conf
