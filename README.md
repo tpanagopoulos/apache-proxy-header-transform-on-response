@@ -5,9 +5,9 @@
 
 Contains the nodejs backend with the following endpoints
 
-- * is replied with 200 and generic hello
 - /restricted is redirected to /login
 - /login returns generic authentication page
+- Any other request is replied with 200 and generic hello
 
 Node listens internally to port 3000.
 
